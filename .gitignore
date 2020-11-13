@@ -1,0 +1,6 @@
+miniRT
+.DS_Store
+test
+*.o
+*.bmp
+*.a
