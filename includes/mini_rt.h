@@ -41,6 +41,9 @@
 
 # define M_PI 3.14159265358979323846
 
+# define KEY_ESC 65307
+# define KEY_TAB 65289
+
 typedef union	u_shape
 {
 	t_sp		*sp;

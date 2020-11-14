@@ -12,20 +12,19 @@
 
 #include "mini_rt.h"
 
-int			exit_minirt(int keycode, t_rt *rt)
+static int	exit_minirt(t_rt *rt)
 {
-	(void)keycode;
 	(void)rt;
 	exit(EXIT_SUCCESS);
 }
 
 static int	next_camera(int keycode, t_rt *rt)
 {
-	if (keycode == 53)
+	if (keycode == KEY_ESC)
 	{
 		exit(EXIT_SUCCESS);
 	}
-	if (keycode == 48)
+	if (keycode == KEY_TAB)
 	{
 		rt->cam_crrnt = rt->cam_crrnt->next;
 		if (!rt->cam_crrnt)
@@ -36,6 +35,13 @@ static int	next_camera(int keycode, t_rt *rt)
 	}
 	mlx_hook(rt->win, 2, 1L << 0, next_camera, rt);
 	mlx_loop(rt->mlx);
+	return (0);
+}
+
+static int	focus_in(t_rt *rt)
+{
+	mlx_clear_window(rt->mlx, rt->win);
+	mlx_put_image_to_window(rt->mlx, rt->win, rt->cam->img.img, 0, 0);
 	return (0);
 }
 
@@ -66,6 +72,7 @@ int			main(int argc, char *argv[])
 		mlx_put_image_to_window(rt.mlx, rt.win, rt.cam->img.img, 0, 0);
 		mlx_hook(rt.win, 2, 1L << 0, next_camera, &rt);
 		mlx_hook(rt.win, 17, 1L << 17, exit_minirt, &rt);
+		mlx_hook(rt.win, 9, 1L << 21, focus_in, &rt);
 		mlx_loop(rt.mlx);
 	}
 	return (0);
