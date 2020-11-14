@@ -25,8 +25,6 @@ void	create_img(t_rt *rt)
 {
 	t_list *tmp;
 
-	if (!(rt->mlx = mlx_init()))
-		handle_error(4, "Failed to initialize Minilibx", rt);
 	if (!rt->save)
 	{
 		if (!(rt->win = mlx_new_window(rt->mlx, rt->res.x, \

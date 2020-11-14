@@ -16,7 +16,6 @@ static int	find_intp(t_rt *rt, t_ray *ray, t_ip *intp, float t)
 {
 	t_tr		*tr;
 	t_vector	p;
-	t_vector	cp;
 
 	tr = rt->obj->shape.tr;
 	p = add(ray->start, multi(ray->dir, t));

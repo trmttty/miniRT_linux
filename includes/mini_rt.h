@@ -14,7 +14,8 @@
 # define MINI_RT_H
 
 # include "../libft/libft.h"
-# include "../minilibx/mlx.h"
+# include "../minilibx-linux/mlx.h"
+# include "../minilibx-linux/mlx_int.h"
 # include "property.h"
 # include "get_next_line.h"
 # include <math.h>
@@ -37,6 +38,8 @@
 # define BMP_FILE_HEADER_SIZE 14
 # define BMP_INFO_HEADER_SIZE 40
 # define HEADER_SIZE 122
+
+# define M_PI 3.14159265358979323846
 
 typedef union	u_shape
 {

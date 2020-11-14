@@ -12,26 +12,26 @@
 
 #include "mini_rt.h"
 
-float   ft_sqr(float x)
+float	ft_sqr(float x)
 {
-    return (x * x);
+	return (x * x);
 }
 
-float   ft_min(float x, float y)
+float	ft_min(float x, float y)
 {
-    if (x < y)
-        return (x);
-    return (y);
+	if (x < y)
+		return (x);
+	return (y);
 }
 
-float   ft_max(float x, float y)
+float	ft_max(float x, float y)
 {
-    if (x > y)
-        return (x);
-    return (y);
+	if (x > y)
+		return (x);
+	return (y);
 }
 
-float   ft_clamp(float v, float minv, float maxv)
+float	ft_clamp(float v, float minv, float maxv)
 {
-    return (ft_min(ft_max(v, minv), maxv));
+	return (ft_min(ft_max(v, minv), maxv));
 }

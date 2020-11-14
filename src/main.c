@@ -14,6 +14,8 @@
 
 int			exit_minirt(int keycode, t_rt *rt)
 {
+	(void)keycode;
+	(void)rt;
 	exit(EXIT_SUCCESS);
 }
 
@@ -51,6 +53,8 @@ int			main(int argc, char *argv[])
 
 	check_argument(argc, argv);
 	ft_memset(&rt, 0, sizeof(t_rt));
+	if (!(rt.mlx = mlx_init()))
+		handle_error(4, "Failed to initialize Minilibx", &rt);
 	parse_rt(argc, argv, &rt);
 	create_img(&rt);
 	rt.cam_crrnt = rt.cam_lst;
