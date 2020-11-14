@@ -45,19 +45,14 @@ static int	focus_in(t_rt *rt)
 	return (0);
 }
 
-void		check_argument(int argc, char *argv[])
-{
-	if (!(argc == 2 || (argc == 3 && ft_strncmp(argv[2], "--save", 7) == 0)))
-		handle_argument_error("Invalid arguments");
-	if (ft_strncmp(ft_strrchr(argv[1], '.'), ".rt", 4))
-		handle_argument_error("Invalid file extension");
-}
-
 int			main(int argc, char *argv[])
 {
 	t_rt	rt;
 
-	check_argument(argc, argv);
+	if (!(argc == 2 || (argc == 3 && ft_strncmp(argv[2], "--save", 7) == 0)))
+		handle_argument_error("Invalid arguments");
+	if (ft_strncmp(ft_strrchr(argv[1], '.'), ".rt", 4))
+		handle_argument_error("Invalid file extension");
 	ft_memset(&rt, 0, sizeof(t_rt));
 	if (!(rt.mlx = mlx_init()))
 		handle_error(4, "Failed to initialize Minilibx", &rt);
