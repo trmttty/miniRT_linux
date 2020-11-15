@@ -20,7 +20,7 @@ void	my_mlx_pixel_put(t_myimg *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-void	calc_ray(t_rt *rt, t_raytrace *r, int x, int y)
+void	calc_ray1(t_rt *rt, t_raytrace *r, int x, int y)
 {
 	t_calc_ray	cr;
 
@@ -44,6 +44,49 @@ void	calc_ray(t_rt *rt, t_raytrace *r, int x, int y)
 	r->eye_ray.start = rt->cam->vp;
 	r->eye_ray.dir = sub(cr.v, rt->cam->vp);
 	normalize(&r->eye_ray.dir);
+}
+
+void	calc_ray(t_rt *rt, t_raytrace *r, int x, int y)
+{
+	t_calc_ray	cr;
+	int			W;
+	int 		H;
+	float		Ws;
+	float 		Hs;
+
+
+	rt->cam->up = vectornew(0, 1, 0);
+	if (norm(cross(rt->cam->up, rt->cam->orient)) == 0)
+		rt->cam->up = vectornew(0, 0, 1);
+	r->dx = cross(rt->cam->up, rt->cam->orient);
+	normalize(&r->dx);
+	r->dy = cross(rt->cam->orient, r->dx);
+	normalize(&r->dy);
+	
+	W = rt->res.x;
+	H = rt->res.y;
+
+	if (W >= H)
+		Ws = 2;
+	else
+		Ws = (2 * W) / (float)H;
+	if (W <= H)
+		Hs = 2;
+	else
+		Hs = (2 * H) / (float)W;
+
+	cr.pc_x = (Ws * (float)x) / (float)(W - 1) - Ws / 2.0f;
+	cr.pc_y = (-Hs * (float)y) / (float)(H - 1) + Hs / 2.0f;
+	
+	float dist = (Ws / 2.0f) / tan((rt->cam->fov / 2.0f) * (M_PI / 180.0f));
+
+	cr.v = add(rt->cam->vp, multi(rt->cam->orient, dist));
+	cr.v = add(cr.v, multi(r->dx, cr.pc_x));
+	cr.v = add(cr.v, multi(r->dy, cr.pc_y));
+	r->eye_ray.start = rt->cam->vp;
+	r->eye_ray.dir = sub(cr.v, rt->cam->vp);
+	normalize(&r->eye_ray.dir);
+	
 }
 
 void	set_raytrace(t_rt *rt)
