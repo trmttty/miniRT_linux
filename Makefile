@@ -62,12 +62,9 @@ $(MINILIBX):
 	make -C $(MINILIBX_DIR)
 
 clean:
-	make clean -C $(LIBFT_DIR)
-	make clean -C $(MINILIBX_DIR)
 	rm -rf $(OBJ_DIR)
 
 fclean: clean
-	make fclean -C $(LIBFT_DIR)
 	rm -f $(NAME)
 
 re: fclean all

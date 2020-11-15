@@ -12,6 +12,7 @@
 
 #include "libft.h"
 #include <stdio.h>
+
 static int	is_wspace(const char c)
 {
 	return (c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r' \
