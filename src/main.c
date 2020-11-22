@@ -42,30 +42,28 @@ static int	focus_in(t_rt *rt)
 	return (0);
 }
 
+void		put_img(t_rt *rt)
+{
+	rt->cam_crrnt = rt->cam_lst;
+	rt->cam = (t_camera*)(rt->cam_crrnt->content);
+	if (rt->save)
+		create_bmp(rt);
+	else
+	{
+		mlx_put_image_to_window(rt->mlx, rt->win, rt->cam->img.img, 0, 0);
+		mlx_hook(rt->win, 2, 1L << 0, next_camera, rt);
+		mlx_hook(rt->win, 17, 1L << 17, exit_minirt, rt);
+		mlx_hook(rt->win, 9, 1L << 21, focus_in, rt);
+		mlx_loop(rt->mlx);
+	}
+}
 int			main(int argc, char *argv[])
 {
 	t_rt	rt;
 
-	if (!(argc == 2 || (argc == 3 && ft_strncmp(argv[2], "--save", 7) == 0)))
-		handle_argument_error("Invalid arguments");
-	if (ft_strncmp(ft_strrchr(argv[1], '.'), ".rt", 4))
-		handle_argument_error("Invalid file extension");
 	ft_memset(&rt, 0, sizeof(t_rt));
-	if (!(rt.mlx = mlx_init()))
-		handle_error(4, "Failed to initialize Minilibx", &rt);
 	parse_rt(argc, argv, &rt);
 	create_img(&rt);
-	rt.cam_crrnt = rt.cam_lst;
-	rt.cam = (t_camera*)(rt.cam_crrnt->content);
-	if (rt.save)
-		create_bmp(&rt);
-	else
-	{
-		mlx_put_image_to_window(rt.mlx, rt.win, rt.cam->img.img, 0, 0);
-		mlx_hook(rt.win, 2, 1L << 0, next_camera, &rt);
-		mlx_hook(rt.win, 17, 1L << 17, exit_minirt, &rt);
-		mlx_hook(rt.win, 9, 1L << 21, focus_in, &rt);
-		mlx_loop(rt.mlx);
-	}
+	put_img(&rt);
 	return (0);
 }

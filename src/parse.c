@@ -37,13 +37,24 @@ static void	parse_line(t_rt *rt)
 	handle_error(-1, "Invalid type identifier", rt);
 }
 
+void		check_argument(int argc, char **argv, t_rt *rt)
+{
+	if (!(argc == 2 || (argc == 3 && ft_strncmp(argv[2], "--save", 7) == 0)))
+		handle_argument_error("Invalid arguments");
+	if (ft_strncmp(ft_strrchr(argv[1], '.'), ".rt", 4))
+		handle_argument_error("Invalid file extension");
+	if (argc == 3)
+		rt->save = 1;
+}
+
 void		parse_rt(int argc, char **argv, t_rt *rt)
 {
 	int		fd;
 	int		rv;
 
-	if (argc == 3)
-		rt->save = 1;
+	check_argument(argc, argv, rt);
+	if (!(rt->mlx = mlx_init()))
+		handle_error(4, "Failed to initialize Minilibx", rt);
 	if ((fd = open(argv[1], O_RDONLY)) == -1)
 		handle_perror("Failed to open scene file", rt);
 	while ((rv = get_next_line(fd, &(rt->line))) > 0)
