@@ -35,9 +35,7 @@
 # define TRIANGLE	4
 
 # define EPSILON 0.001f
-# define BMP_FILE_HEADER_SIZE 14
-# define BMP_INFO_HEADER_SIZE 40
-# define HEADER_SIZE 122
+# define HEADER_SIZE 54
 
 # define M_PI 3.14159265358979323846
 

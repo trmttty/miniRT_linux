@@ -49,12 +49,12 @@ void	header_bmp(char **data, t_rt *rt)
 	*(unsigned int *)(*data + 22) = rt->res.y;
 	*(unsigned short *)(*data + 26) = 1;
 	*(unsigned short *)(*data + 28) = 24;
-	*(unsigned int *)(*data + 30) = 0;
-	*(unsigned int *)(*data + 34) = (unsigned int)size;
-	*(unsigned int *)(*data + 38) = 3780;
-	*(unsigned int *)(*data + 42) = 3780;
-	*(int *)(*data + 46) = 0;
-	*(int *)(*data + 50) = 0;
+	// *(unsigned int *)(*data + 30) = 0;
+	// *(unsigned int *)(*data + 34) = (unsigned int)size;
+	// *(unsigned int *)(*data + 38) = 3780;
+	// *(unsigned int *)(*data + 42) = 3780;
+	// *(int *)(*data + 46) = 0;
+	// *(int *)(*data + 50) = 0;
 }
 
 void	export_bmp(char *filename, t_rt *rt)
