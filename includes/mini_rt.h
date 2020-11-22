@@ -6,7 +6,7 @@
 /*   By: ttarumot <ttarumot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 15:00:17 by ttarumot          #+#    #+#             */
-/*   Updated: 2020/11/22 19:30:11 by ttarumot         ###   ########.fr       */
+/*   Updated: 2020/11/22 19:35:32 by ttarumot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,9 +194,8 @@ void			create_bmp(t_rt *rt);
 /*
 ** error
 */
-void			handle_error(int errnum, char *message, t_rt *rt);
-void			handle_perror(char *message, t_rt *rt);
-void			handle_argument_error(char *message);
+void			handle_error(char *message);
+void			handle_perror(char *message);
 
 /*
 ** utils

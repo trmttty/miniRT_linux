@@ -6,7 +6,7 @@
 /*   By: ttarumot <ttarumot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 22:45:45 by ttarumot          #+#    #+#             */
-/*   Updated: 2020/11/13 11:25:13 by ttarumot         ###   ########.fr       */
+/*   Updated: 2020/11/22 19:48:58 by ttarumot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	parse_line(t_rt *rt)
 {
 	if (!(rt->tab = ft_split(rt->line, ' ')))
-		handle_perror("Failed split line", rt);
+		handle_perror("Failed split line");
 	if (ft_strncmp(*rt->tab, "R", 2) == 0)
 		return (parse_resolution(rt));
 	else if (ft_strncmp(*rt->tab, "A", 2) == 0)
@@ -34,7 +34,7 @@ static void	parse_line(t_rt *rt)
 		return (parse_triangle(rt));
 	else if (ft_strncmp(*rt->tab, "c", 2) == 0)
 		return (parse_camera(rt));
-	handle_error(-1, "Invalid type identifier", rt);
+	handle_error("Invalid type identifier");
 }
 
 void		check_argument(int argc, char **argv, t_rt *rt)
@@ -54,9 +54,9 @@ void		parse_rt(int argc, char **argv, t_rt *rt)
 
 	check_argument(argc, argv, rt);
 	if (!(rt->mlx = mlx_init()))
-		handle_error(4, "Failed to initialize Minilibx", rt);
+		handle_error("Failed to initialize Minilibx");
 	if ((fd = open(argv[1], O_RDONLY)) == -1)
-		handle_perror("Failed to open scene file", rt);
+		handle_perror("Failed to open scene file");
 	while ((rv = get_next_line(fd, &(rt->line))) > 0)
 	{
 		if (ft_isalpha(*(rt->line)))
@@ -69,9 +69,9 @@ void		parse_rt(int argc, char **argv, t_rt *rt)
 	free(rt->line);
 	rt->line = NULL;
 	if (close(fd) == -1)
-		handle_perror("Failed close file", rt);
+		handle_perror("Failed close file");
 	if (rt->res.read == 0)
-		handle_perror("Resolution must be declared", rt);
+		handle_perror("Resolution must be declared");
 	if (rt->cam_lst == NULL)
-		handle_perror("Camera must be declared", rt);
+		handle_perror("Camera must be declared");
 }

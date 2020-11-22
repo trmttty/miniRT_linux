@@ -6,7 +6,7 @@
 /*   By: ttarumot <ttarumot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 09:15:00 by ttarumot          #+#    #+#             */
-/*   Updated: 2020/11/13 09:18:08 by ttarumot         ###   ########.fr       */
+/*   Updated: 2020/11/22 19:47:44 by ttarumot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ static void	check_color(size_t size, char **rgb, t_rt *rt)
 		if (ft_strlen(rgb[size]) > 3)
 		{
 			ft_tabfree(rgb);
-			handle_error(22, "RGB colors in range [0-255]", rt);
+			handle_error("RGB colors in range [0-255]");
 		}
 		n = ft_atoi(rgb[size]);
 		if (n < 0 || n > 255)
 		{
 			ft_tabfree(rgb);
-			handle_error(22, "RGB colors in range [0-255]", rt);
+			handle_error( "RGB colors in range [0-255]");
 		}
 	}
 }
@@ -54,12 +54,12 @@ t_colorf	parse_color(char *s, t_rt *rt)
 	size_t		size;
 
 	if (!(rgb = ft_split(s, ',')))
-		handle_perror("Failed to split color", rt);
+		handle_perror("Failed to split color");
 	size = tabsize(rgb);
 	if (size != 3)
 	{
 		ft_tabfree(rgb);
-		handle_error(22, "Failed to parse color", rt);
+		handle_error("Failed to parse color");
 	}
 	check_color(size, rgb, rt);
 	c.r = ft_atoi(rgb[0]) / 255.0f;
@@ -75,11 +75,11 @@ t_vector	parse_vector(char *s, t_rt *rt)
 	char		**vec3;
 
 	if (!(vec3 = ft_split(s, ',')))
-		handle_perror("Failed split vector", rt);
+		handle_perror("Failed split vector");
 	if (tabsize(vec3) != 3)
 	{
 		ft_tabfree(vec3);
-		handle_error(22, "Failed parse vector", rt);
+		handle_error("Failed parse vector");
 	}
 	v.x = ft_atof(vec3[0]);
 	v.y = ft_atof(vec3[1]);
@@ -94,10 +94,10 @@ t_vector	parse_normal(char *s, t_rt *rt)
 
 	normal = parse_vector(s, rt);
 	if (normal.x < -1 || normal.x > 1)
-		handle_error(22, "Normalized orientation vector in range [-1,1]", rt);
+		handle_error("Normalized orientation vector in range [-1,1]");
 	if (normal.y < -1 || normal.y > 1)
-		handle_error(22, "Normalized orientation vector in range [-1,1]", rt);
+		handle_error("Normalized orientation vector in range [-1,1]");
 	if (normal.z < -1 || normal.z > 1)
-		handle_error(22, "Normalized orientation vector in range [-1,1]", rt);
+		handle_error("Normalized orientation vector in range [-1,1]");
 	return (normal);
 }

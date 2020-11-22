@@ -6,7 +6,7 @@
 /*   By: ttarumot <ttarumot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 08:48:54 by ttarumot          #+#    #+#             */
-/*   Updated: 2020/11/12 18:49:15 by ttarumot         ###   ########.fr       */
+/*   Updated: 2020/11/22 19:45:10 by ttarumot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ void		parse_resolution(t_rt *rt)
 	int	sizey;
 
 	if (rt->res.read)
-		handle_error(22, "Resolution can only be declared once", rt);
+		handle_error("Resolution can only be declared once");
 	if (tabsize(rt->tab) != 3)
-		handle_error(22, "Invalid resolution", rt);
+		handle_error("Invalid resolution");
 	if ((rt->res.x = ft_atoi(rt->tab[1])) <= 0)
-		handle_error(22, "Failed parse x render size", rt);
+		handle_error("Failed parse x render size");
 	if ((rt->res.y = ft_atoi(rt->tab[2])) <= 0)
-		handle_error(22, "Failed parse y render size", rt);
+		handle_error("Failed parse y render size");
 	mlx_get_screen_size(rt->mlx, &sizex, &sizey);
 	if (rt->res.x > sizex)
 		rt->res.x = sizex;

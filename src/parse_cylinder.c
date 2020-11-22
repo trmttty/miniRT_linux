@@ -6,7 +6,7 @@
 /*   By: ttarumot <ttarumot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 16:35:27 by ttarumot          #+#    #+#             */
-/*   Updated: 2020/11/13 22:34:36 by ttarumot         ###   ########.fr       */
+/*   Updated: 2020/11/22 19:43:31 by ttarumot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ void		parse_cylinder(t_rt *rt)
 	t_obj	*obj;
 
 	if (!(cy = ft_calloc(1, sizeof(t_cy))))
-		handle_perror("Failed to calloc cylinder", rt);
+		handle_perror("Failed to calloc cylinder");
 	if (!(obj = ft_calloc(1, sizeof(t_obj))))
-		handle_perror("Failed to calloc cylinder object", rt);
+		handle_perror("Failed to calloc cylinder object");
 	if (tabsize(rt->tab) != 6)
-		handle_error(22, "Failed to parse cy", rt);
+		handle_error("Failed to parse cy");
 	cy->bottom = parse_vector(rt->tab[1], rt);
 	cy->normal = parse_vector(rt->tab[2], rt);
 	normalize(&cy->normal);

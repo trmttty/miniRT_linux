@@ -6,7 +6,7 @@
 /*   By: ttarumot <ttarumot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/07 15:29:04 by ttarumot          #+#    #+#             */
-/*   Updated: 2020/11/13 12:31:22 by ttarumot         ###   ########.fr       */
+/*   Updated: 2020/11/22 19:37:36 by ttarumot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,12 @@ void	export_bmp(char *filename, t_rt *rt)
 	padding = (4 - (rt->res.x * 3) % 4) % 4;
 	filesize = HEADER_SIZE + (3 * rt->res.x + padding) * rt->res.y;
 	if (!(data = malloc((filesize))))
-		handle_perror("Failed to malloc bmp data", rt);
+		handle_perror("Failed to malloc bmp data");
 	ft_memset(data, 0, filesize);
 	header_bmp(&data, rt);
 	fill_bmp(&data, rt);
 	if ((fd = open(filename, O_CREAT | O_TRUNC | O_RDWR, 0644)) <= 0)
-		handle_perror("Failed to read bmp file", rt);
+		handle_perror("Failed to read bmp file");
 	write(fd, data, (filesize));
 	free(data);
 	close(fd);
@@ -92,9 +92,9 @@ void	create_bmp(t_rt *rt)
 	{
 		rt->cam = (t_camera*)(tmp->content);
 		if (!(index_str = ft_itoa(index)))
-			handle_perror("Failed to create index_str", rt);
+			handle_perror("Failed to create index_str");
 		if (!(filename = ft_strjoin(index_str, ".bmp")))
-			handle_perror("Failed to create filename", rt);
+			handle_perror("Failed to create filename");
 		export_bmp(filename, rt);
 		free(index_str);
 		free(filename);
