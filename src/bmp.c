@@ -34,7 +34,7 @@ void	fill_bmp(char **data, t_rt *rt)
 			*(*data + i++) = *(rt->cam->img.addr + j);
 		}
 		k = 0;
-		while (k++ < (4 - (rt->res.x * 3) % 4) % 4) 
+		while (k++ < (4 - (rt->res.x * 3) % 4) % 4)
 			*(*data + i++) = 0;
 	}
 }
