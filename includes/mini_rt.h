@@ -6,7 +6,7 @@
 /*   By: ttarumot <ttarumot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 15:00:17 by ttarumot          #+#    #+#             */
-/*   Updated: 2020/11/14 01:36:43 by ttarumot         ###   ########.fr       */
+/*   Updated: 2020/11/22 19:30:11 by ttarumot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,7 @@ t_vector		parse_normal(char *s, t_rt *rt);
 ** img
 */
 void			create_img(t_rt *rt);
+void			put_img(t_rt *rt);
 void			set_raytrace(t_rt *rt);
 void			raytrace(t_rt *rt, t_raytrace *r);
 

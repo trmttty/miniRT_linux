@@ -24,6 +24,7 @@ SRC_RT = main.c \
 			parse_triangle.c \
 			parse_utils.c \
 			create_img.c \
+			put_img.c \
 			raytrace_setting.c \
 			raytrace_1.c \
 			raytrace_2.c \
