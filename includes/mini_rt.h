@@ -99,11 +99,11 @@ typedef struct	s_raytrace
 
 typedef struct	s_calc_ray
 {
-	float		aspect;
-	float		pndc_x;
-	float		pndc_y;
+	float		w_s;
+	float		h_s;
 	float		pc_x;
 	float		pc_y;
+	float		dist;
 	t_vector	v;
 }				t_calc_ray;
 
