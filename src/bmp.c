@@ -101,4 +101,5 @@ void	create_bmp(t_rt *rt)
 		index++;
 		tmp = tmp->next;
 	}
+	exit(EXIT_SUCCESS);
 }

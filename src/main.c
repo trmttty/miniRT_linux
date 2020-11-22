@@ -12,9 +12,8 @@
 
 #include "mini_rt.h"
 
-static int	exit_minirt(t_rt *rt)
+static int	exit_minirt()
 {
-	(void)rt;
 	exit(EXIT_SUCCESS);
 }
 
@@ -33,8 +32,6 @@ static int	next_camera(int keycode, t_rt *rt)
 		mlx_clear_window(rt->mlx, rt->win);
 		mlx_put_image_to_window(rt->mlx, rt->win, rt->cam->img.img, 0, 0);
 	}
-	mlx_hook(rt->win, 2, 1L << 0, next_camera, rt);
-	mlx_loop(rt->mlx);
 	return (0);
 }
 
