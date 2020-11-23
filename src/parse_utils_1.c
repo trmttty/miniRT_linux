@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_utils.c                                      :+:      :+:    :+:   */
+/*   parse_utils_1.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ttarumot <ttarumot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 09:15:00 by ttarumot          #+#    #+#             */
-/*   Updated: 2020/11/23 12:35:39 by ttarumot         ###   ########.fr       */
+/*   Updated: 2020/11/23 13:36:21 by ttarumot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ static void	check_color(size_t size, char **rgb)
 	while (size--)
 	{
 		if (ft_strlen(rgb[size]) > 3)
-			handle_error("RGB colors in range [0-255]");
+			handle_error("RGB values are integers in range [0-255]");
 		n = ft_atoi(rgb[size]);
 		if (n < 0 || n > 255)
-			handle_error("RGB colors in range [0-255]");
+			handle_error("RGB values are integers in range [0-255]");
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: ttarumot <ttarumot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 15:00:17 by ttarumot          #+#    #+#             */
-/*   Updated: 2020/11/23 09:34:41 by ttarumot         ###   ########.fr       */
+/*   Updated: 2020/11/23 13:02:06 by ttarumot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,8 @@ size_t			tabsize(char **tab);
 t_colorf		parse_color(char *s);
 t_vector		parse_vector(char *s);
 t_vector		parse_normal(char *s);
+int				ft_atoi(char *str);
+double			ft_atof(char *str);
 
 /*
 ** img
