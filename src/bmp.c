@@ -6,16 +6,17 @@
 /*   By: ttarumot <ttarumot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/07 15:29:04 by ttarumot          #+#    #+#             */
-/*   Updated: 2020/11/13 12:31:22 by ttarumot         ###   ########.fr       */
+/*   Updated: 2020/11/23 09:33:56 by ttarumot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini_rt.h"
 
-void	fill_bmp(char **data, t_rt *rt)
+static void	fill_bmp(char **data, t_rt *rt)
 {
 	int i;
 	int j;
+	int k;
 	int x;
 	int y;
 
@@ -32,51 +33,53 @@ void	fill_bmp(char **data, t_rt *rt)
 			*(*data + i++) = *(rt->cam->img.addr + j++);
 			*(*data + i++) = *(rt->cam->img.addr + j);
 		}
+		k = 0;
+		while (k++ < (4 - (rt->res.x * 3) % 4) % 4)
+			*(*data + i++) = 0;
 	}
 }
 
-void	header_bmp(char **data, t_rt *rt)
+static void	header_bmp(char **data, t_rt *rt)
 {
-	unsigned int size;
+	unsigned int filesize;
+	unsigned int padding;
 
-	size = rt->res.y * rt->res.x * 3;
-	*(unsigned short *)*data = *(const unsigned int *)(unsigned long)"BM";
-	*(unsigned int *)(*data + 2) = (size + HEADER_SIZE);
+	padding = (4 - (rt->res.x * 3) % 4) % 4;
+	filesize = HEADER_SIZE + (3 * rt->res.x + padding) * rt->res.y;
+	*(unsigned char *)*data = 'B';
+	*(unsigned char *)(*data + 1) = 'M';
+	*(unsigned int *)(*data + 2) = filesize;
 	*(unsigned int *)(*data + 6) = 0u;
-	*(unsigned char *)(*data + 10) = HEADER_SIZE;
+	*(unsigned int *)(*data + 10) = HEADER_SIZE;
 	*(unsigned int *)(*data + 14) = HEADER_SIZE - 14;
-	*(unsigned int *)(*data + 18) = rt->res.x;
-	*(unsigned int *)(*data + 22) = rt->res.y;
+	*(int *)(*data + 18) = rt->res.x;
+	*(int *)(*data + 22) = rt->res.y;
 	*(unsigned short *)(*data + 26) = 1;
 	*(unsigned short *)(*data + 28) = 24;
-	*(unsigned int *)(*data + 30) = 0;
-	*(unsigned int *)(*data + 34) = (unsigned int)size;
-	*(unsigned int *)(*data + 38) = 3780;
-	*(unsigned int *)(*data + 42) = 3780;
-	*(int *)(*data + 46) = 0;
-	*(int *)(*data + 50) = 0;
 }
 
-void	export_bmp(char *filename, t_rt *rt)
+static void	export_bmp(char *filename, t_rt *rt)
 {
 	int				fd;
-	unsigned int	size;
+	unsigned int	filesize;
+	unsigned int	padding;
 	char			*data;
 
-	size = rt->res.y * rt->res.x * 3;
-	if (!(data = malloc((size + HEADER_SIZE))))
-		handle_perror("Failed to malloc bmp data", rt);
-	ft_memset(data, 0, size + HEADER_SIZE);
+	padding = (4 - (rt->res.x * 3) % 4) % 4;
+	filesize = HEADER_SIZE + (3 * rt->res.x + padding) * rt->res.y;
+	if (!(data = malloc((filesize))))
+		handle_perror("Failed to malloc bmp data");
+	ft_memset(data, 0, filesize);
 	header_bmp(&data, rt);
 	fill_bmp(&data, rt);
 	if ((fd = open(filename, O_CREAT | O_TRUNC | O_RDWR, 0644)) <= 0)
-		handle_perror("Failed to read bmp file", rt);
-	write(fd, data, (size + HEADER_SIZE));
+		handle_perror("Failed to read bmp file");
+	write(fd, data, (filesize));
 	free(data);
 	close(fd);
 }
 
-void	create_bmp(t_rt *rt)
+void		create_bmp(t_rt *rt)
 {
 	t_list	*tmp;
 	char	*filename;
@@ -89,13 +92,14 @@ void	create_bmp(t_rt *rt)
 	{
 		rt->cam = (t_camera*)(tmp->content);
 		if (!(index_str = ft_itoa(index)))
-			handle_perror("Failed to create index_str", rt);
+			handle_perror("Failed to create index_str");
 		if (!(filename = ft_strjoin(index_str, ".bmp")))
-			handle_perror("Failed to create filename", rt);
+			handle_perror("Failed to create filename");
 		export_bmp(filename, rt);
 		free(index_str);
 		free(filename);
 		index++;
 		tmp = tmp->next;
 	}
+	exit(EXIT_SUCCESS);
 }

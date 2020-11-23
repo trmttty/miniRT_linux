@@ -44,7 +44,6 @@ static float	calc_t(t_discriminant *d, t_cy *cy, t_ray *ray)
 	float		t;
 	float		t1;
 	float		t2;
-	t_vector	p;
 
 	t = -1.0f;
 	if (d->d == 0)

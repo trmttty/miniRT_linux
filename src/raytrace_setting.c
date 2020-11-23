@@ -12,7 +12,7 @@
 
 #include <mini_rt.h>
 
-void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
+void	my_mlx_pixel_put(t_myimg *data, int x, int y, int color)
 {
 	char	*dst;
 
@@ -20,17 +20,8 @@ void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-void	calc_ray(t_rt *rt, t_raytrace *r, int x, int y)
+void	set_ray(t_rt *rt, t_raytrace *r)
 {
-	t_calc_ray	cr;
-
-	cr.aspect = rt->res.x / (float)rt->res.y;
-	cr.pndc_x = (x + 0.5f) / rt->res.x;
-	cr.pndc_y = (y + 0.5f) / rt->res.y;
-	cr.pc_x = (2 * cr.pndc_x - 1) * cr.aspect * tan((rt->cam->fov / 2.0f) * \
-				(M_PI / 180.0f));
-	cr.pc_y = (1 - 2 * cr.pndc_y) * tan((rt->cam->fov / 2.0f) * \
-				(M_PI / 180.0f));
 	rt->cam->up = vectornew(0, 1, 0);
 	if (norm(cross(rt->cam->up, rt->cam->orient)) == 0)
 		rt->cam->up = vectornew(0, 0, 1);
@@ -38,7 +29,29 @@ void	calc_ray(t_rt *rt, t_raytrace *r, int x, int y)
 	normalize(&r->dx);
 	r->dy = cross(rt->cam->orient, r->dx);
 	normalize(&r->dy);
-	cr.v = add(rt->cam->vp, rt->cam->orient);
+}
+
+void	calc_ray(t_rt *rt, t_raytrace *r, int x, int y)
+{
+	t_calc_ray	cr;
+	int			w;
+	int			h;
+
+	set_ray(rt, r);
+	w = rt->res.x;
+	h = rt->res.y;
+	if (w >= h)
+		cr.w_s = 2;
+	else
+		cr.w_s = (2 * w) / (float)h;
+	if (w <= h)
+		cr.h_s = 2;
+	else
+		cr.h_s = (2 * h) / (float)w;
+	cr.pc_x = (cr.w_s * (float)x) / (float)(w - 1) - cr.w_s / 2.0f;
+	cr.pc_y = (-cr.h_s * (float)y) / (float)(h - 1) + cr.h_s / 2.0f;
+	cr.dist = (cr.w_s / 2.0f) / tan((rt->cam->fov / 2.0f) * (M_PI / 180.0f));
+	cr.v = add(rt->cam->vp, multi(rt->cam->orient, cr.dist));
 	cr.v = add(cr.v, multi(r->dx, cr.pc_x));
 	cr.v = add(cr.v, multi(r->dy, cr.pc_y));
 	r->eye_ray.start = rt->cam->vp;

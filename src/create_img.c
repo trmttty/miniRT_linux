@@ -6,7 +6,7 @@
 /*   By: ttarumot <ttarumot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/01 11:13:06 by ttarumot          #+#    #+#             */
-/*   Updated: 2020/11/11 02:39:14 by ttarumot         ###   ########.fr       */
+/*   Updated: 2020/11/22 19:39:17 by ttarumot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,11 @@ void	create_img(t_rt *rt)
 {
 	t_list *tmp;
 
-	if (!(rt->mlx = mlx_init()))
-		handle_error(4, "Failed to initialize Minilibx", rt);
 	if (!rt->save)
 	{
 		if (!(rt->win = mlx_new_window(rt->mlx, rt->res.x, \
 										rt->res.y, "miniRT")))
-			handle_error(4, "Failed to initialize Minilibx", rt);
+			handle_error("Failed to initialize Minilibx");
 	}
 	tmp = rt->cam_lst;
 	while (tmp)

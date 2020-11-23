@@ -3,13 +3,13 @@ R 1000 700
 A 0.3 255,255,255
 
 # along the x axis pointed towards {0, 0, 0}
-c -50.0,0.0,0.0 1.0,0.0,0.0 60
+c -70.0,0.0,0.0 1.0,0.0,0.0 60
 
 # along the y axis pointed towards {0, 0, 0}
-c 0.0,70.0,0.0 0.0,-1.0,0.0 60
+c 0.0,100.0,0.0 0.0,-1.0,0.0 60
 
 # along the z axis pointed towards {0, 0, 0}
-c 0.0,0.0,-50.0 0.0,0.0,1.0 60
+c 0.0,0.0,-70.0 0.0,0.0,1.0 60
 
 # not on any axis pointed towards {0, 0, 0}
 c -50.0,50.0,-50.0 1.0,-1.0,1.0 60

@@ -1,10 +1,14 @@
-CC			= gcc
-FLAGS		= -Wall -Wextra -Werror
-NAME 		= miniRT
-DIR_LIB		= libft
-LIBFT		= $(DIR_LIB)/libft.a
-SRC_RT_DIR 	= ./src/
-OBJ_DIR 	= ./obj/
+CC				= gcc
+FLAGS			= -Wall -Wextra -Werror
+NAME 			= miniRT
+SRC_RT_DIR 		= ./src/
+OBJ_DIR 		= ./obj/
+LIBFT_DIR		= libft
+LIBFT			= $(LIBFT_DIR)/libft.a
+MINILIBX_DIR	= minilibx-linux
+MINILIBX		= $(MINILIBX_DIR)/libmlx.a
+INC				=/usr/include
+INCLIB			=$(INC)/../lib
 
 SRC_RT = main.c \
 			get_next_line.c \
@@ -18,8 +22,10 @@ SRC_RT = main.c \
 			parse_square.c \
 			parse_cylinder.c \
 			parse_triangle.c \
-			parse_utils.c \
+			parse_utils_1.c \
+			parse_utils_2.c \
 			create_img.c \
+			put_img.c \
 			raytrace_setting.c \
 			raytrace_1.c \
 			raytrace_2.c \
@@ -40,28 +46,29 @@ OBJ_RT = $(addprefix $(OBJ_DIR),$(SRC_RT:%.c=%.o))
 OBJ = $(OBJ_RT)
 HEADERS = includes
 
-all : $(NAME)
+all: $(NAME)
 
-$(NAME) : $(LIBFT) $(OBJ_DIR) $(OBJ_RT)
-	$(CC) -I $(HEADERS) -L minilibx -lmlx -framework OpenGL -framework AppKit -lz -L libft -lft $(OBJ) libmlx.dylib -o $@
+$(NAME): $(LIBFT) $(MINILIBX) $(OBJ_DIR) $(OBJ_RT)
+	$(CC) $(FLAGS) -o $(NAME) $(OBJ) -L minilibx-linux -lmlx -L$(INCLIB) -lXext -lX11 -lm -lbsd -L libft -lft
 
-$(OBJ_DIR) :
+$(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 
-$(OBJ_DIR)%.o : $(SRC_RT_DIR)%.c
-	$(CC) -I $(HEADERS) -o $@ -c $<
+$(OBJ_DIR)%.o: $(SRC_RT_DIR)%.c
+	$(CC) $(FLAGS) -I $(HEADERS) -o $@ -c $<
 
 $(LIBFT):
-	make bonus -C $(DIR_LIB)
+	make bonus -C $(LIBFT_DIR)
 
-clean :
-	make clean -C $(DIR_LIB)
+$(MINILIBX):
+	make -C $(MINILIBX_DIR)
+
+clean:
 	rm -rf $(OBJ_DIR)
 
-fclean : clean
-	make fclean -C $(DIR_LIB)
+fclean: clean
 	rm -f $(NAME)
 
-re : fclean all
+re: fclean all
 
-.PHONY: all clean fclean re run
+.PHONY: all clean fclean re

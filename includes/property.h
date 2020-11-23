@@ -34,14 +34,14 @@ typedef struct	s_vector
 	float		z;
 }				t_vector;
 
-typedef struct	s_img
+typedef struct	s_myimg
 {
 	void		*img;
 	char		*addr;
 	int			bits_per_pixel;
 	int			line_length;
 	int			endian;
-}				t_img;
+}				t_myimg;
 
 typedef struct	s_res
 {
@@ -64,7 +64,7 @@ typedef struct	s_camera
 	t_vector	up;
 	t_vector	right;
 	int			fov;
-	t_img		img;
+	t_myimg		img;
 }				t_camera;
 
 typedef struct	s_light

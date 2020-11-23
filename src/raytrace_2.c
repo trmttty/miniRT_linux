@@ -20,7 +20,7 @@ int			get_nearest_object(t_rt *rt, t_ray *ray, t_obj **obj)
 	t_ip		intp;
 
 	nearest_obj = NULL;
-	nearest_intp.dist = MAXFLOAT;
+	nearest_intp.dist = __FLT_MAX__;
 	tmp = rt->obj_lst;
 	while (tmp)
 	{

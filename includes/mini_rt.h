@@ -6,7 +6,7 @@
 /*   By: ttarumot <ttarumot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 15:00:17 by ttarumot          #+#    #+#             */
-/*   Updated: 2020/11/14 01:36:43 by ttarumot         ###   ########.fr       */
+/*   Updated: 2020/11/23 13:02:06 by ttarumot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 # define MINI_RT_H
 
 # include "../libft/libft.h"
-# include "../minilibx/mlx.h"
+# include "../minilibx-linux/mlx.h"
+# include "../minilibx-linux/mlx_int.h"
 # include "property.h"
 # include "get_next_line.h"
 # include <math.h>
@@ -34,9 +35,12 @@
 # define TRIANGLE	4
 
 # define EPSILON 0.001f
-# define BMP_FILE_HEADER_SIZE 14
-# define BMP_INFO_HEADER_SIZE 40
-# define HEADER_SIZE 122
+# define HEADER_SIZE 54
+
+# define M_PI 3.14159265358979323846
+
+# define KEY_ESC 65307
+# define KEY_TAB 65289
 
 typedef union	u_shape
 {
@@ -93,11 +97,11 @@ typedef struct	s_raytrace
 
 typedef struct	s_calc_ray
 {
-	float		aspect;
-	float		pndc_x;
-	float		pndc_y;
+	float		w_s;
+	float		h_s;
 	float		pc_x;
 	float		pc_y;
+	float		dist;
 	t_vector	v;
 }				t_calc_ray;
 
@@ -129,14 +133,17 @@ void			parse_square(t_rt *rt);
 void			parse_cylinder(t_rt *rt);
 void			parse_triangle(t_rt *rt);
 size_t			tabsize(char **tab);
-t_colorf		parse_color(char *s, t_rt *rt);
-t_vector		parse_vector(char *s, t_rt *rt);
-t_vector		parse_normal(char *s, t_rt *rt);
+t_colorf		parse_color(char *s);
+t_vector		parse_vector(char *s);
+t_vector		parse_normal(char *s);
+int				ft_atoi(char *str);
+double			ft_atof(char *str);
 
 /*
 ** img
 */
 void			create_img(t_rt *rt);
+void			put_img(t_rt *rt);
 void			set_raytrace(t_rt *rt);
 void			raytrace(t_rt *rt, t_raytrace *r);
 
@@ -182,16 +189,13 @@ int				find_triangle(t_rt *rt, t_ray *ray, t_ip *intp);
 /*
 ** bmp
 */
-void			create_bmp_image(t_rt *rt, char *file_name);
-void			export_bmp(char *filename, t_rt *my_mlx);
 void			create_bmp(t_rt *rt);
 
 /*
 ** error
 */
-void			handle_error(int errnum, char *message, t_rt *rt);
-void			handle_perror(char *message, t_rt *rt);
-void			handle_argument_error(char *message);
+void			handle_error(char *message);
+void			handle_perror(char *message);
 
 /*
 ** utils
