@@ -6,7 +6,7 @@
 /*   By: ttarumot <ttarumot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 09:15:00 by ttarumot          #+#    #+#             */
-/*   Updated: 2020/11/23 13:30:32 by ttarumot         ###   ########.fr       */
+/*   Updated: 2020/11/23 13:42:40 by ttarumot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static void	validate(char *str)
 {
 	if (*str != '\0')
 		handle_error("Failed to parse the figures");
-
 }
 
 static long	set_number(char *str)
