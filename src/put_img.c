@@ -6,13 +6,13 @@
 /*   By: ttarumot <ttarumot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 19:27:15 by ttarumot          #+#    #+#             */
-/*   Updated: 2020/11/22 19:28:38 by ttarumot         ###   ########.fr       */
+/*   Updated: 2020/11/23 09:30:18 by ttarumot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini_rt.h"
 
-static int	exit_minirt()
+static int	exit_minirt(void)
 {
 	exit(EXIT_SUCCESS);
 }

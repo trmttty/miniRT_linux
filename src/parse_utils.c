@@ -6,7 +6,7 @@
 /*   By: ttarumot <ttarumot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 09:15:00 by ttarumot          #+#    #+#             */
-/*   Updated: 2020/11/22 19:47:44 by ttarumot         ###   ########.fr       */
+/*   Updated: 2020/11/23 09:29:45 by ttarumot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ size_t		tabsize(char **tab)
 	return (size);
 }
 
-static void	check_color(size_t size, char **rgb, t_rt *rt)
+static void	check_color(size_t size, char **rgb)
 {
 	int n;
 
@@ -42,12 +42,12 @@ static void	check_color(size_t size, char **rgb, t_rt *rt)
 		if (n < 0 || n > 255)
 		{
 			ft_tabfree(rgb);
-			handle_error( "RGB colors in range [0-255]");
+			handle_error("RGB colors in range [0-255]");
 		}
 	}
 }
 
-t_colorf	parse_color(char *s, t_rt *rt)
+t_colorf	parse_color(char *s)
 {
 	t_colorf	c;
 	char		**rgb;
@@ -61,7 +61,7 @@ t_colorf	parse_color(char *s, t_rt *rt)
 		ft_tabfree(rgb);
 		handle_error("Failed to parse color");
 	}
-	check_color(size, rgb, rt);
+	check_color(size, rgb);
 	c.r = ft_atoi(rgb[0]) / 255.0f;
 	c.g = ft_atoi(rgb[1]) / 255.0f;
 	c.b = ft_atoi(rgb[2]) / 255.0f;
@@ -69,7 +69,7 @@ t_colorf	parse_color(char *s, t_rt *rt)
 	return (c);
 }
 
-t_vector	parse_vector(char *s, t_rt *rt)
+t_vector	parse_vector(char *s)
 {
 	t_vector	v;
 	char		**vec3;
@@ -88,11 +88,11 @@ t_vector	parse_vector(char *s, t_rt *rt)
 	return (v);
 }
 
-t_vector	parse_normal(char *s, t_rt *rt)
+t_vector	parse_normal(char *s)
 {
 	t_vector	normal;
 
-	normal = parse_vector(s, rt);
+	normal = parse_vector(s);
 	if (normal.x < -1 || normal.x > 1)
 		handle_error("Normalized orientation vector in range [-1,1]");
 	if (normal.y < -1 || normal.y > 1)

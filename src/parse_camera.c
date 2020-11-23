@@ -6,7 +6,7 @@
 /*   By: ttarumot <ttarumot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 17:57:53 by ttarumot          #+#    #+#             */
-/*   Updated: 2020/11/22 19:42:54 by ttarumot         ###   ########.fr       */
+/*   Updated: 2020/11/23 04:42:32 by ttarumot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	parse_camera(t_rt *rt)
 	ft_lstadd_back(&rt->cam_lst, element);
 	if (tabsize(rt->tab) != 4)
 		handle_error("Failed to parse c");
-	cam->vp = parse_vector(rt->tab[1], rt);
-	cam->orient = parse_normal(rt->tab[2], rt);
+	cam->vp = parse_vector(rt->tab[1]);
+	cam->orient = parse_normal(rt->tab[2]);
 	normalize(&cam->orient);
 	if (dot(cam->orient, cam->orient) > 1)
 		handle_error("Orientation vector in range [-1,1]");

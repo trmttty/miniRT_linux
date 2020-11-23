@@ -6,7 +6,7 @@
 /*   By: ttarumot <ttarumot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 15:00:17 by ttarumot          #+#    #+#             */
-/*   Updated: 2020/11/22 19:35:32 by ttarumot         ###   ########.fr       */
+/*   Updated: 2020/11/23 04:41:26 by ttarumot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,9 +133,9 @@ void			parse_square(t_rt *rt);
 void			parse_cylinder(t_rt *rt);
 void			parse_triangle(t_rt *rt);
 size_t			tabsize(char **tab);
-t_colorf		parse_color(char *s, t_rt *rt);
-t_vector		parse_vector(char *s, t_rt *rt);
-t_vector		parse_normal(char *s, t_rt *rt);
+t_colorf		parse_color(char *s);
+t_vector		parse_vector(char *s);
+t_vector		parse_normal(char *s);
 
 /*
 ** img

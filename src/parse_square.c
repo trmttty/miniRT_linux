@@ -6,7 +6,7 @@
 /*   By: ttarumot <ttarumot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/05 14:23:40 by ttarumot          #+#    #+#             */
-/*   Updated: 2020/11/22 19:46:12 by ttarumot         ###   ########.fr       */
+/*   Updated: 2020/11/23 04:49:02 by ttarumot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,9 @@ void		parse_square(t_rt *rt)
 	ft_lstadd_back(&rt->obj_lst, element);
 	if (tabsize(rt->tab) != 5)
 		handle_error("Failed to parse sq");
-	sq->sc = parse_vector(rt->tab[1], rt);
-	sq->normal = parse_normal(rt->tab[2], rt);
+	sq->normal = parse_normal(rt->tab[2]);
 	normalize(&sq->normal);
 	sq->side = ft_atof(rt->tab[3]);
-	sq->col = parse_color(rt->tab[4], rt);
+	sq->col = parse_color(rt->tab[4]);
 	parse_square_sub(rt, sq, obj);
 }
