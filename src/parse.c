@@ -6,7 +6,7 @@
 /*   By: ttarumot <ttarumot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 22:45:45 by ttarumot          #+#    #+#             */
-/*   Updated: 2020/11/23 10:27:37 by ttarumot         ###   ########.fr       */
+/*   Updated: 2020/11/23 12:43:30 by ttarumot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void		parse_rt(int argc, char **argv, t_rt *rt)
 		free(rt->line);
 	}
 	if (rv < 0)
-		handle_perror("Failed read file");
+		handle_perror("Failed to read file");
 	if (ft_isalpha(*(rt->line)))
 		parse_line(rt);
 	free(rt->line);
