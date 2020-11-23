@@ -6,7 +6,7 @@
 /*   By: ttarumot <ttarumot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 15:00:17 by ttarumot          #+#    #+#             */
-/*   Updated: 2020/11/23 04:41:26 by ttarumot         ###   ########.fr       */
+/*   Updated: 2020/11/23 09:34:41 by ttarumot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,8 +187,6 @@ int				find_triangle(t_rt *rt, t_ray *ray, t_ip *intp);
 /*
 ** bmp
 */
-void			create_bmp_image(t_rt *rt, char *file_name);
-void			export_bmp(char *filename, t_rt *my_mlx);
 void			create_bmp(t_rt *rt);
 
 /*

@@ -6,7 +6,7 @@
 /*   By: ttarumot <ttarumot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 22:45:45 by ttarumot          #+#    #+#             */
-/*   Updated: 2020/11/23 04:37:14 by ttarumot         ###   ########.fr       */
+/*   Updated: 2020/11/23 10:27:37 by ttarumot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,15 @@ void		parse_rt(int argc, char **argv, t_rt *rt)
 			parse_line(rt);
 		free(rt->line);
 	}
+	if (rv < 0)
+		handle_perror("Failed read file");
 	if (ft_isalpha(*(rt->line)))
 		parse_line(rt);
 	free(rt->line);
 	if (close(fd) == -1)
 		handle_perror("Failed close file");
 	if (rt->res.read == 0)
-		handle_perror("Resolution must be declared");
+		handle_error("Resolution must be declared");
 	if (rt->cam_lst == NULL)
-		handle_perror("Camera must be declared");
+		handle_error("Camera must be declared");
 }

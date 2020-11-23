@@ -6,13 +6,13 @@
 /*   By: ttarumot <ttarumot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/07 15:29:04 by ttarumot          #+#    #+#             */
-/*   Updated: 2020/11/22 19:37:36 by ttarumot         ###   ########.fr       */
+/*   Updated: 2020/11/23 09:33:56 by ttarumot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini_rt.h"
 
-void	fill_bmp(char **data, t_rt *rt)
+static void	fill_bmp(char **data, t_rt *rt)
 {
 	int i;
 	int j;
@@ -39,7 +39,7 @@ void	fill_bmp(char **data, t_rt *rt)
 	}
 }
 
-void	header_bmp(char **data, t_rt *rt)
+static void	header_bmp(char **data, t_rt *rt)
 {
 	unsigned int filesize;
 	unsigned int padding;
@@ -58,7 +58,7 @@ void	header_bmp(char **data, t_rt *rt)
 	*(unsigned short *)(*data + 28) = 24;
 }
 
-void	export_bmp(char *filename, t_rt *rt)
+static void	export_bmp(char *filename, t_rt *rt)
 {
 	int				fd;
 	unsigned int	filesize;
@@ -79,7 +79,7 @@ void	export_bmp(char *filename, t_rt *rt)
 	close(fd);
 }
 
-void	create_bmp(t_rt *rt)
+void		create_bmp(t_rt *rt)
 {
 	t_list	*tmp;
 	char	*filename;
