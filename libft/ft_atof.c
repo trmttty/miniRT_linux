@@ -6,26 +6,42 @@
 /*   By: ttarumot <ttarumot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/13 09:16:25 by ttarumot          #+#    #+#             */
-/*   Updated: 2020/11/13 09:17:04 by ttarumot         ###   ########.fr       */
+/*   Updated: 2020/11/23 12:16:13 by ttarumot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+static int	is_wspace(const char c)
+{
+	return (c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r' \
+			|| c == ' ');
+}
+
 double		ft_atof(char *str)
 {
-	double	ret1;
-	double	ret2;
-	int		len;
+	double	ret;
+	double	div;
+	int		sign;
 
-	ret1 = (double)ft_atoi(str);
-	while (*str && *str != '.')
+	while (is_wspace(*str))
 		str++;
+	sign = 1;
+	if (*str == '+' || *str == '-')
+		if (*str++ == '-')
+			sign = -1;
+	ret = 0;
+	while (ft_isdigit(*str))
+		ret = ret * 10 + sign * (*str++ - '0');
+	div = 1;
 	if (*str == '.')
+	{
 		str++;
-	ret2 = (double)ft_atoi(str);
-	len = ft_strlen(str);
-	while (len--)
-		ret2 /= 10;
-	return (ret1 + ((ret1 >= 0) ? ret2 : -ret2));
+		while (ft_isdigit(*str))
+		{
+			ret = ret * 10 + sign * (*str++ - '0');
+			div /= 10;
+		}
+	}
+	return (ret * div);
 }
